@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <todo-list v-bind:todos="todos"></todo-list>
+    <create-todo v-on:create-todo="addTodo"></create-todo>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import TodoList from './components/TodoList'
+import CreateTodo from './components/CreateTodo'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    TodoList,
+    CreateTodo
+  },
+  data () {
+    return {
+      todos: [{
+        title: 'Todo A',
+        project: 'Project A',
+        done: false
+      }, {
+        title: 'Todo B',
+        project: 'Project B',
+        done: true
+      }, {
+        title: 'Todo C',
+        project: 'Project C',
+        done: false
+      }]
+    }
+  },
+  methods: {
+    addTodo (newTodo) {
+      this.todos.push({
+        title: newTodo.title,
+        project: newTodo.project,
+        done: false
+      })
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
